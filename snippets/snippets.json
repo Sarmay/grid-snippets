@@ -1,0 +1,546 @@
+{
+  "gridInit": {
+    "prefix": "grid-init",
+    "body": [
+      "var grid = new kakaGrid.ListGrid({",
+      "    parentElement: document.getElementById('kaka-grid'),",
+      "    header: [{",
+      "         field: 'check',",
+      "         caption: '',",
+      "         width: 50,",
+      "         columnType: 'check',",
+      "         action: 'check'",
+      "   }, {",
+      "         field: 'id',",
+      "         caption: 'ID',",
+      "         width: 'auto',",
+      "         columnType: 'center'",
+      "   }],",
+      "    frozenColCount: 2,",
+      "    dataSource: dataSource",
+      "});"
+    ],
+    "description": "初始化grid"
+  },
+  "vueGrid": {
+    "prefix": "vue-grid",
+    "body": [
+      "<kaka-grid",
+      "ref='$kakaGrid'",
+      "class='mu-absolute-fit'",
+      ":columns='$columns'",
+      ":records='$records' />"
+    ],
+    "description": "<kaka-grid/>标签"
+  },
+  "gridTreeColumns": {
+    "prefix": "grid-tree-columns",
+    "body": [
+      "key-field='$id'",
+      "parent-key-field='$parentId'"
+    ],
+    "description": "表格树状列"
+  },
+  "gridColumns": {
+    "prefix": "grid-columns",
+    "body": [
+      ":columns='$columns'"
+    ],
+    "description": "表格列"
+  },
+  "gridRecords": {
+    "prefix": "grid-records",
+    "body": [
+      ":records='$records'"
+    ],
+    "description": "表格数据"
+  },
+  "gridTheme": {
+    "prefix": "grid-theme",
+    "body": [
+      ":theme='{",
+      "  headerRowHeight: 49,",
+      "  borderColor:['#EBECF0', '#EBECF0', '#EBECF1', '#EBECF0'],",
+      "  defaultBgColor: '#FDD',",
+      "  tree:{",
+      "   lineColor: '#CCC',",
+      "   buttonColor: '#FFF',",
+      "   buttonBgColor: '#CCC',",
+      "   buttonBorderColor: 'CCC'",
+      "  },",
+      "  highlightBorderColor: 'transparent',",
+      "  frozenRowsFont:'${1|bold,normal|} 12px $sans-serif',",
+      "}'"
+    ],
+    "description": "表格样式主题"
+  },
+  "gridHideHeader": {
+    "prefix": "grid-hide-header",
+    "body": [
+      "hide-header"
+    ],
+    "description": "隐藏表头"
+  },
+  "gridReadOnly": {
+    "prefix": "grid-read-only",
+    "body": [
+      "readonly"
+    ],
+    "description": "表格只读"
+  },
+  "gridCheckCascade": {
+    "prefix": "grid-check-cascade",
+    "body": [
+      "check-cascade"
+    ],
+    "description": "级联"
+  },
+  "gridSpanBodyOptions": {
+    "prefix": "grid-span-body-options",
+    "body": [
+      ":span-body-options='{startCol:0,endCol:3}'"
+    ],
+    "description": "合并行"
+  },
+  "gridSingleSelection": {
+    "prefix": "grid-single-selection",
+    "body": [
+      "single-selection$1"
+    ],
+    "description": "单行选择"
+  },
+  "gridFrozenColCount": {
+    "prefix": "grid-frozen-col-count",
+    "body": [
+      ":frozen-col-count='3'"
+    ],
+    "description": "合并列数"
+  },
+  "gridBorderModeNone": {
+    "prefix": "grid-border-mode-none",
+    "body": [
+      ":border-mode='${1|none,content-border,grid-border|}'"
+    ],
+    "description": "无边框-边框线设置"
+  },
+  "gridBorderModeContentBorder": {
+    "prefix": "grid-border-mode-content-border",
+    "body": [
+      ":border-mode='${1|content-border,none,grid-border|}'"
+    ],
+    "description": "内容区域边框-边框线设置"
+  },
+  "gridBorderModeGridBorder": {
+    "prefix": "grid-border-mode-grid-border",
+    "body": [
+      ":border-mode='${1|grid-border,none,content-border|}'"
+    ],
+    "description": "grid区域边框-边框线设置"
+  },
+  "gridBorderModeBorderColor": {
+    "prefix": "grid-border-mode-border-color",
+    "body": [
+      ":border-color='${1|transparent,#333|}'"
+    ],
+    "description": "边线颜色-边框线设置-默认为透明色"
+  },
+  "gridBorderModeBorderWidth": {
+    "prefix": "grid-border-mode-border-width",
+    "body": [
+      ":border-width='${1|0,1,2|}'"
+    ],
+    "description": "边线宽度-边框线设置-默认为0"
+  },
+  "grid@load": {
+    "prefix": "grid-@load",
+    "body": [
+      "@load='$loading'"
+    ],
+    "description": "表格加载时触发"
+  },
+  "grid@loadFn": {
+    "prefix": "grid-fn-load",
+    "body": [
+    "  loading (vm) {",
+    "    vm.kakaGrid.frozenColCount = 3 // 固定前三行",
+    "    vm.kakaGrid.singleSelection = true // 单选",
+    "    vm.kakaGrid.dataSource.expandAll() // 展开",
+    "    vm.kakaGrid.focusCell(0, 1) // 选中第一行第一列",
+    "    vm.invalidate()",
+    "  }"
+    ],
+    "description": "表格加载函数"
+  },
+  "grid@cellselect": {
+    "prefix": "grid-@cellselect",
+    "body": [
+      "@cellselect='$selectCell'"
+    ],
+    "description": "表格被选中触发"
+  },
+  "grid@cellselectFn": {
+    "prefix": "grid-fn-cellselect",
+    "body": [
+    "  select ({ row,col }, selected, vm) {",
+    "    if (selected) {",
+    "      const record = vm.kakaGrid.getRowRecord(row)",
+    "    }",
+    "  }"
+    ],
+    "description": "表格选中函数"
+  },
+  "grid@buttonclick": {
+    "prefix": "grid-@buttonclick",
+    "body": [
+      "@buttonclick='$buttonclick'"
+    ],
+    "description": "点击按钮"
+  },
+  "grid@getRecords": {
+    "prefix": "grid-@getRecords",
+    "body": [
+      "@getRecords='$getRecords'"
+    ],
+    "description": "获取数据"
+  },
+  "grid@hasRecords": {
+    "prefix": "grid-@hasRecords",
+    "body": [
+      "@hasRecords='$hasRecords'"
+    ],
+    "description": "数据存在"
+  },
+  "grid@cellcheck": {
+    "prefix": "grid-@cellcheck",
+    "body": [
+      "@cellcheck='$cellcheck'"
+    ],
+    "description": "单选"
+  },
+  "grid@celluncheck": {
+    "prefix": "grid-@celluncheck",
+    "body": [
+      "@celluncheck='$celluncheck'"
+    ],
+    "description": "未单选"
+  },
+  "grid@checkall": {
+    "prefix": "grid-@checkall",
+    "body": [
+      "@checkall='$checkall'"
+    ],
+    "description": "全选"
+  },
+  "grid@uncheckall": {
+    "prefix": "grid-@uncheckall",
+    "body": [
+      "@uncheckall='$uncheckall'"
+    ],
+    "description": "未全选"
+  },
+  "grid@paste": {
+    "prefix": "grid-@paste",
+    "body": [
+      "@paste='$pasteData'"
+    ],
+    "description": "粘贴"
+  },
+  "grid@pasteFn": {
+    "prefix": "grid-fn-paste",
+    "body": [
+    "  pasteData (data, b, vm) {",
+    "    if (!this.isEditing) return",
+    "   //  需要引入 import { paste } from '../../../../utils/paste'",
+    "    let pasteColumns= [",
+    "      {",
+    "        fieldName: '$name'",
+    "      },",
+    "      {",
+    "        fieldName: '$curAmount',",
+    "        dataType: '$number',",
+    "        decimal: 2",
+    "      },",
+    "      {",
+    "        fieldName: '$remark'",
+    "      }",
+    "    ]",
+    "    const result = paste(",
+    "      data,",
+    "      vm.kakaGrid,",
+    "      pasteColumns",
+    "    )",
+
+    "    const row = vm.kakaGrid.selection.range.start.row",
+    "    const { commit } = this.$store",
+
+    "    result.forEach((ele, index) => {",
+    "      ele.name = '新名称'",
+    "      if (row + index <= this.records.length) {",
+    "        const record = vm.kakaGrid.getRowRecord(row + index)",
+    "        Object.assign(record, ele)",
+    "      } else {",
+    "        commit('setLocalId')",
+    "        ele.id = this.localId",
+    "        this.records.push(ele)",
+    "      }",
+    "    })",
+
+    "    vm.invalidate()",
+    "  }"
+    ],
+    "description": "多行粘贴函数"
+  },
+  "grid@cellchange": {
+    "prefix": "grid-@cellchange",
+    "body": [
+      "@cellchange='$changeCell'"
+    ],
+    "description": "内容有变化时触发"
+  },
+  "grid@cellchangeFn": {
+    "prefix": "grid-fn-cellchange",
+    "body": [
+    "  changeCell (data, vm) {",
+    "    const { value, field, record } = data",
+    "  }"
+    ],
+    "description": "内容变化函数"
+  },
+  "gridColumnNormal": {
+    "prefix": "grid-col-normal",
+    "body": [
+      "{",
+      "  field: '$money',",
+      "  caption: '$1金额',",
+      "  width: '$auto'",
+      "}"
+    ],
+    "description": "普通列-简"
+  },
+  "gridColumnNormalFull": {
+    "prefix": "grid-col-normal-full",
+    "body": [
+      "{",
+      "  field: '$money',",
+      "  caption: '$1金额',",
+      "  type: 'number',",
+      "  width: 'auto',",
+      "  minWidth: '120',",
+      "  align: '${2|right,center|}',",
+      "  headerStyle: {",
+      "    textAlign: '${3|right,center|}'",
+      "  },",
+      "  style: res => {",
+      "    const active = this.$activeCategory.$name === rec.$name",
+      "    return {",
+      "       color: active",
+      "           ? '#008CD6'",
+      "           : '#333',",
+      "       bgColor: active",
+      "           ? '#F4FBFF'",
+      "           : '#fff'",
+      "     }",
+      "  },",
+      "  readonly: rec => {",
+      "     return !this.isEditing",
+      "   }",
+      "}"
+    ],
+    "description": "普通列-全"
+  },
+  "gridColumnId": {
+    "prefix": "grid-col-id",
+    "body": [
+      "{",
+      "  caption: '$2序号',",
+      "  type: 'no',",
+      "  width: ${1|60,'auto'|}",
+      "}"
+    ],
+    "description": "序号列"
+  },
+  "gridColumnStatus": {
+    "prefix": "grid-col-status",
+    "body": [
+      "{",
+      "  caption: '$1状态',",
+      "  width: '80',",
+      "  align: '${1|right,center|}',",
+      "  style: res => {",
+      "    return {",
+      "       font: '$bold 12px sans-serif'$2",
+      "     }",
+      "  },",
+      "  icon: {",
+      "    svg: function (rec) {",
+      "      var w = '60px'",
+      "      var h = '22px'",
+      "      var text = rec.status",
+      "      var bgColor = rec.status === '待考核'",
+      "        ? '#FFDBDA' : rec.status === '已考核' ? '#D5FFE8' : ''",
+      "      var color = rec.status === '待考核'",
+      "        ? '#F57A79' : rec.status === '已考核' ? '#1FBF6A' : ''",
+      "      return rec.status ? \"<svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='\" + w + \"' height='\" + h + \"' viewBox='0 0 32 16'><rect x='0' y='0' rx='3' ry='3' width='32' height='14' fill='\" + bgColor + \"' stroke='\" + color + \"'/><text x='16' y='8' text-anchor='middle' dy='.3em' fill='\" + color + \"' style='font-size:8px'>\" + text + '</text></svg>' : ''",
+      "    }",
+      "  }",
+      "}"
+    ],
+    "description": "状态列"
+  },
+  "gridColumnInlineInputEditor": {
+    "prefix": "grid-col-line-input-editor",
+    "body": [
+      "{",
+      "  field: '$field'",
+      "  caption: '$1双击编辑',",
+      "  width: 'auto',",
+      "  align: '${2|right,center|}',",
+      "  headerStyle: {",
+      "    textAlign: 'center'",
+      "  },",
+      "  style: res => {",
+      "  return {",
+      "     font: '$bold 12px sans-serif'$2",
+      "     }",
+      "  },",
+      "  action: new kakaGrid.columns.action.InlineInputEditor({",
+      "    type: 'number',",
+      "    disableInput: (rec, { cell }) => {",
+      "      return false",
+      "    }",
+      "  })",
+      "}"
+    ],
+    "description": "行内编辑列1"
+  },
+  "gridColumnInlineLookupEditor": {
+    "prefix": "grid-col-line-lookup-editor",
+    "body": [
+      "{",
+      "  field: '$field'",
+      "  caption: '$1双击编辑',",
+      "  width: 'auto',",
+      "  align: '${2|right,center|}',",
+      "  headerStyle: {",
+      "    textAlign: 'center'",
+      "  },",
+      "  style: res => {",
+      "  return {",
+      "     font: '$bold 12px sans-serif'$2",
+      "     }",
+      "  },",
+      "  columnType: new kakaGrid.columns.type.TreeColumn({",
+      "      convert: function(value, displayValue, cell, grid) {",
+      "          // 可以在这里转换参照显示值",
+      "          return displayValue;",
+      "      },",
+      "  }),",
+      "  action: new kakaGrid.columns.action.InlineLookupEditor({",
+      "    records: lookupRecords,",
+      "    valueField: 'id',",
+      "    valueType: 'string', // 数据类型，支持 number 和 string，默认为：string",
+      "    captionField: 'name',", 
+      "    allowOtherInput: false, // 是否允许参照列表之外的数据录入，默认为：false",
+      "    filterFields: ['name'], // 只使用 name 数据过滤",
+      "  })",
+      "}"
+    ],
+    "description": "行内编辑列2"
+  },
+  "gridColumnInlineButton": {
+    "prefix": "grid-col-line-button",
+    "body": [
+      "{",
+      "  width: 'auto',",
+      "  align: '$center',",
+      "  rowSpan: 2,",
+      "  headerStyle: {",
+      "    textAlign: 'center'",
+      "  },",
+      "  style: res => {",
+      "  return {",
+      "     textAlign: 'center',",
+      "     buttonBgColor: '#aaa',",
+      "     font: '$bold 12px sans-serif'$2",
+      "    }",
+      "  },",
+      "  columnType: new kakaGrid.columns.type.ButtonColumn({",
+      "     caption: '$1编辑',",
+      "     linkButton: true",
+      "   }),",
+      "  action: new kakaGrid.columns.action.ButtonAction({",
+      "    action: function(rec) {",
+      "       alert(JSON.stringify(rec))",
+      "    },",
+      "    disabled: (rec, { cell }) => {",
+      "      return false",
+      "    }",
+      "  })",
+      "}"
+    ],
+    "description": "行内按钮列"
+  },
+  "gridColumnCheck": {
+    "prefix": "grid-col-checkBox",
+    "body": [
+      "{",
+      "  width: 100,",
+      "  type: 'checkBox'",
+      "  headerReadonly: rec => {",
+      "     return !this.isEditing",
+      "  },",
+      "   readonly: rec => {",
+      "     return !this.isEditing",
+      "   },",
+      "  headerStyle: rec => {",
+      "    return {",
+      "      uncheckBgColor: this.isEditing",
+      "        ? '#fff'",
+      "        : '#EAEAEA'",
+      "    }",
+      "  },",
+      "  headerType: 'check',",
+      "  headerAction: 'check',",
+      "  action: 'check',",
+      "  contentHidden: false,",
+      "  style: res => {",
+      "   return {",
+      "     borderColor: '#f0f',",
+      "     checkBgColor: '#303',",
+      "     uncheckBgColor: '#a0a'",
+      "    }",
+      "  },",
+      "  columnType: new kakaGrid.columns.type.CheckColumn({",
+      "     hidden: function(rec) {",
+      "         return false",
+      "     }",
+      "   }),",
+      "}"
+    ],
+    "description": "行内单选框"
+  },
+  "gridColumnInInlineTextAreaEditor": {
+    "prefix": "grid-col-line-text-area-editor",
+    "body": [
+      "{",
+      "  field: '$field'",
+      "  caption: '$1双击编辑',",
+      "  width: 'auto',",
+      "  columnType: 'multilinetext',//clear-button 显示为清空按钮",
+      "  style: {",
+      "     appearance: 'lookup-button'",
+      "   },",
+      "  action: new kakaGrid.columns.action.InlineTextAreaEditor({",
+      "    action: rec => {",
+      "              alert(JSON.stringify(rec))",
+      "    },",
+      "    disableAction: (rec, { cell }) => {",
+      "      return false",
+      "    }",
+      "  })",
+      "}"
+    ],
+    "description": "行内编辑列3"
+  }
+
+}
