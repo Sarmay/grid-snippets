@@ -116,38 +116,24 @@
     ],
     "description": "合并列数"
   },
-  "gridBorderModeNone": {
-    "prefix": "grid-border-mode-none",
+  "gridBorderMode": {
+    "prefix": "grid-border-mode",
     "body": [
-      ":border-mode='${1|none,content-border,grid-border|}'"
+      "border-mode='${1|none,grid-border,content-border|}'"
     ],
-    "description": "无边框-边框线设置"
-  },
-  "gridBorderModeContentBorder": {
-    "prefix": "grid-border-mode-content-border",
-    "body": [
-      ":border-mode='${1|content-border,none,grid-border|}'"
-    ],
-    "description": "内容区域边框-边框线设置"
-  },
-  "gridBorderModeGridBorder": {
-    "prefix": "grid-border-mode-grid-border",
-    "body": [
-      ":border-mode='${1|grid-border,none,content-border|}'"
-    ],
-    "description": "grid区域边框-边框线设置"
+    "description": "无边框|grid区域边框|内容区域边框-边框线设置"
   },
   "gridBorderModeBorderColor": {
     "prefix": "grid-border-mode-border-color",
     "body": [
-      ":border-color='${1|transparent,#333|}'"
+      "border-color='${1|transparent,#333|}'"
     ],
     "description": "边线颜色-边框线设置-默认为透明色"
   },
   "gridBorderModeBorderWidth": {
     "prefix": "grid-border-mode-border-width",
     "body": [
-      ":border-width='${1|0,1,2|}'"
+      "border-width='${1|0,1,2|}'"
     ],
     "description": "边线宽度-边框线设置-默认为0"
   },
@@ -485,31 +471,17 @@
     "body": [
       "{",
       "  width: 100,",
-      "  type: 'checkBox'",
+      "  type: 'checkBox',",
       "  headerReadonly: rec => {",
       "     return !this.isEditing",
       "  },",
       "   readonly: rec => {",
       "     return !this.isEditing",
       "   },",
-      "  headerStyle: rec => {",
-      "    return {",
-      "      uncheckBgColor: this.isEditing",
-      "        ? '#fff'",
-      "        : '#EAEAEA'",
-      "    }",
-      "  },",
       "  headerType: 'check',",
       "  headerAction: 'check',",
       "  action: 'check',",
       "  contentHidden: false,",
-      "  style: res => {",
-      "   return {",
-      "     borderColor: '#f0f',",
-      "     checkBgColor: '#303',",
-      "     uncheckBgColor: '#a0a'",
-      "    }",
-      "  },",
       "  columnType: new kakaGrid.columns.type.CheckColumn({",
       "     hidden: function(rec) {",
       "         return false",
