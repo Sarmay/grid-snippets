@@ -51,6 +51,7 @@
 |grid-col-status|svg状态显示列|
 |grid-col-line-button|行内按钮|
 |grid-col-checkBox|行内单选框|
+|grid-col-switch|行内滑块开关|
 |grid-col-line-input-editor|行内编辑1|
 |grid-col-line-lookup-editor|行内编辑2|
 |grid-col-line-text-area-editor|行内编辑3|

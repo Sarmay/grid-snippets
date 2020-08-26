@@ -513,6 +513,36 @@
       "}"
     ],
     "description": "行内编辑列3"
+  },
+  "gridColumnSwitch": {
+    "prefix": "grid-col-switch",
+    "body": [
+      "{",
+      "  field: 'isRelatied',",
+      "  width: 95,",
+      "  caption: '状态',",
+      "  disableResize: true,",
+      "  columnType: 'switch',",
+      "  align: 'center',",
+      "  action: new kakaGrid.columns.action.SwitchEditor({",
+      "    disabled: rec => {",
+      "      return rec.bizStatus != null",
+      "    }",
+      "  }),",
+      "  tooltipType: 'overflow-html',",
+      "  tooltip: rec => {",
+      "    if (rec.bizStatus) return `<span style='color: #F57A79;'>${rec.bizStatus}</span>`",
+      "  },",
+      "  style: rec => {",
+      "    if (rec.bizStatus != null) {",
+      "      return rec.isRelatied",
+      "        ? { checkBgColor: '#A6D3FF' }",
+      "        : { uncheckBgColor: '#ddd', borderColor: '#fff' }",
+      "    }",
+        "}",
+      "}"
+    ],
+    "description": "行内开关，带有悬浮提手"
   }
 
 }
