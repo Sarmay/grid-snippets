@@ -91,9 +91,9 @@
   "gridCheckCascade": {
     "prefix": "grid-check-cascade",
     "body": [
-      "check-cascade"
+      "check-cascade='false'"
     ],
-    "description": "级联"
+    "description": "取消复选框级联"
   },
   "gridSpanBodyOptions": {
     "prefix": "grid-span-body-options",
@@ -157,6 +157,20 @@
     ],
     "description": "表格加载函数"
   },
+  "grid@resize": {
+    "prefix": "grid-fn-resize",
+    "body": [
+    "  grid.resize()"
+    ],
+    "description": "表格大小自适应"
+  },
+  "grid@dispose": {
+    "prefix": "grid-fn-dispose",
+    "body": [
+    "  grid.dispose()"
+    ],
+    "description": "销毁表格"
+  },
   "grid@cellselect": {
     "prefix": "grid-@cellselect",
     "body": [
@@ -201,28 +215,28 @@
     "body": [
       "@cellcheck='$cellcheck'"
     ],
-    "description": "单选"
+    "description": "复选框选中"
   },
   "grid@celluncheck": {
     "prefix": "grid-@celluncheck",
     "body": [
       "@celluncheck='$celluncheck'"
     ],
-    "description": "未单选"
+    "description": "复选框未选中"
   },
   "grid@checkall": {
     "prefix": "grid-@checkall",
     "body": [
       "@checkall='$checkall'"
     ],
-    "description": "全选"
+    "description": "复选框全选"
   },
   "grid@uncheckall": {
     "prefix": "grid-@uncheckall",
     "body": [
       "@uncheckall='$uncheckall'"
     ],
-    "description": "未全选"
+    "description": "复选框未全选"
   },
   "grid@paste": {
     "prefix": "grid-@paste",
@@ -543,6 +557,119 @@
       "}"
     ],
     "description": "行内开关，带有悬浮提手"
+  },
+  "grid-fn-headerValues": {
+    "prefix": "grid-fn-headerValues",
+    "body": [
+      "grid.headerValues.set('check', false)"
+    ],
+    "description": "设置表头复选框是否全选或取消勾选"
+  },
+  "grid-fn-makeVisibleGridCell": {
+    "prefix": "grid-fn-makeVisibleGridCell",
+    "body": [
+      "const index = grid.dataSource.expandToKey(keyValue) //获取索引",
+      "grid.makeVisibleGridCell('字段名', index); // 根据显示记录索引，呈现对应的单元格"
+    ],
+    "description": "按索引移动到可视区域"
+  },
+  "grid-fn-makeVisibleCell": {
+    "prefix": "grid-fn-makeVisibleCell",
+    "body": [
+      "grid.makeVisibleCell(col, row); // 根据行和列，呈现对应的单元格"
+    ],
+    "description": "按行列移动到可视区域"
+  },
+  "grid-fn-expandToKey": {
+    "prefix": "grid-fn-expandToKey",
+    "body": [
+      "const index = grid.dataSource.expandToKey(keyValue)"
+    ],
+    "description": "获取字段索引"
+  },
+  "grid-fn-selectCellRange": {
+    "prefix": "grid-fn-selectCellRange",
+    "body": [
+      "grid.selectCellRange(startCol: number, startRow: number, endCol: number, endRow: number)"
+    ],
+    "description": "选中单元格(会触发select_cell 事件)"
+  },
+  "grid-fn-focusCell": {
+    "prefix": "grid-fn-focusCell",
+    "body": [
+      "grid.focusCell(col, row)"
+    ],
+    "description": "设置单个单元格焦点(会触发select_cell 事件)"
+  },
+  "grid-fn-getRecordStartRowByRecordIndex": {
+    "prefix": "grid-fn-getRecordStartRowByRecordIndex",
+    "body": [
+      "const row = grid.getRecordStartRowByRecordIndex(index) // index是记录索引"
+    ],
+    "description": "根据索引获取行号"
+  },
+  "grid-fn-selection.range": {
+    "prefix": "grid-fn-selection.range",
+    "body": [
+      "grid.selection.range.start.col",
+      "grid.selection.range.start.row"
+    ],
+    "description": "获取焦点最小单元格"
+  },
+  "grid-fn-invalidate": {
+    "prefix": "grid-fn-invalidate",
+    "body": [
+      "grid.invalidate();"
+    ],
+    "description": "刷新表格第一种方法"
+  },
+  "grid-fn-refresh": {
+    "prefix": "grid-fn-refresh",
+    "body": [
+      "grid.dataSource.refresh(); // 会触发SELECTED_CELL"
+    ],
+    "description": "刷新表格第二种方法"
+  },
+  "grid-fn-fireSelectedEvent": {
+    "prefix": "grid-fn-fireSelectedEvent",
+    "body": [
+      "grid.selection.fireSelectedEvent(); // 主动触发SELECTED_CELL"
+    ],
+    "description": "刷新表格第三种方法"
+  },
+  "grid-fn-frozenColCount": {
+    "prefix": "grid-fn-frozenColCount",
+    "body": [
+      "grid.frozenColCount = 3 // 固定前三行"
+    ],
+    "description": "固定前N行"
+  },
+  "grid-fn-singleSelection": {
+    "prefix": "grid-fn-singleSelection",
+    "body": [
+      "grid.singleSelection = true // 单选"
+    ],
+    "description": "只让单选单元格"
+  },
+  "grid-fn-expandAll": {
+    "prefix": "grid-fn-expandAll",
+    "body": [
+      "grid.dataSource.expandAll() // 展开父子节点"
+    ],
+    "description": "展开父子节点"
+  },
+  "grid-fn-collapseAll": {
+    "prefix": "grid-fn-collapseAll",
+    "body": [
+      "grid.dataSource.collapseAll() // 折叠父子节点"
+    ],
+    "description": "折叠父子节点"
+  },
+  "grid-fn-getRowRecord": {
+    "prefix": "grid-fn-getRowRecord",
+    "body": [
+      "const record = grid.dataSource.getRowRecord(row)"
+    ],
+    "description": "根据行号获取行数据"
   }
-
 }
