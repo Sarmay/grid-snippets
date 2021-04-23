@@ -2,7 +2,7 @@
   "name": "grid",
   "displayName": "kakaGrid",
   "description": "kaka-grid语法提示",
-  "version": "1.0.11",
+  "version": "1.1.0",
   "keywords": ["mctech", "kaka-grid", "kaka"],
   "engines": {
     "vscode": "^1.0.0"
